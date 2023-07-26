@@ -27,6 +27,9 @@ int _printf(const char *format, ...)
 	char *str;
 	va_list arg;
 
+	if (format == NULL)
+		return (-1);
+
 	n = strlen(format);
 	va_start(arg, format);
 	for (i = 0; i < n; ++i)
@@ -75,6 +78,9 @@ int _printf(const char *format, ...)
 					_putchar('%');
 					++count;
 					break;
+				default:
+					_putchar(format[i]);
+					++count;
 			}
 		}
 		else
