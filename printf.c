@@ -31,29 +31,48 @@ int _printf(const char *format, ...)
 	va_start(arg, format);
 	for (i = 0; i < n; ++i)
 	{
-		if (format[i] != '%')
+		if (format[i] == '\\')
 		{
-			_putchar(format[i]);
-			++count;
+			++i;
+			switch (format[i])
+			{
+				case 'n':
+					_putchar('\n');
+					++count;
+					break;
+				case '\\':
+					_putchar('\\');
+					++count;
+ 					break;
+				case '\"':
+					_putchar('\"');
+					break;
+			}
 		}
 		else if (format[i] == '%')
 		{
-			switch (format[i + 1])
+			++i;
+			switch (format[i])
 			{
 				case 'c':
-					++i;
 					_putchar(va_arg(arg, int));
 					++count;
 					break;
 				case 's':
-					++i;
 					str = va_arg(arg, char *);
 					prints(str, strlen(str));
 					count += strlen(str);
 					break;
-				default:
+				case '%':
 					_putchar('%');
+					++count;
+					break;
 			}
+		}
+		else
+		{
+			_putchar(format[i]);
+			++count;
 		}
 	}
 	va_end(arg);
