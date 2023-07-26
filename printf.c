@@ -8,7 +8,7 @@
 
 void prints(char *str, int n)
 {
-	int i;
+	int i;	
 
 	for (i = 0; i < n; ++i)
 		_putchar(str[i]);
@@ -60,8 +60,16 @@ int _printf(const char *format, ...)
 					break;
 				case 's':
 					str = va_arg(arg, char *);
-					prints(str, strlen(str));
-					count += strlen(str);
+					if (str != NULL)
+					{
+						prints(str, strlen(str));
+						count += strlen(str);
+					}
+					else if (str == NULL)
+					{
+						prints("(null)", 6);
+						count += 6;
+					}
 					break;
 				case '%':
 					_putchar('%');
