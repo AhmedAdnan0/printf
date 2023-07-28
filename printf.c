@@ -21,15 +21,20 @@ void prints(char *str, int n)
 
 void printi(int x)
 {
+	unsigned int y;
+
 	if (x < 0)
 	{
 		_putchar('-');
-		x = -1 * x;
+		y = -1 * x;
 	}
-	if (x / 10 != 0)
-		printi(x / 10);
+	else
+		y = x;
+
+	if (y / 10 != 0)
+		printi(y / 10);
 	
-	_putchar('0' + x % 10);
+	_putchar('0' + y % 10);
 }
 
 /**
@@ -42,16 +47,23 @@ void printi(int x)
 int counti(int x)
 {
 	int i = 0;
+	unsigned int y;
+
+	if (x == 0)
+		return (1);
 
 	if (x < 0)
 	{
-		x = -1 * x;
+		y = -1 * x;
 		++i;
 	}
-	while (x > 0)
+	else
+		y = x;
+
+	while (y > 0)
 	{
 		++i;
-		x = x / 10;
+		y = y / 10;
 	}
 	return (i);
 }
