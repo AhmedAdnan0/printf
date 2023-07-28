@@ -15,6 +15,48 @@ void prints(char *str, int n)
 }
 
 /**
+ * printi - prints int
+ * @x: intiger
+ */
+
+int printi(int x)
+{
+	if (x < 0)
+	{
+		_putchar('-');
+		x = -1 * x;
+	}
+	if (x / 10 != 0)
+		printi(x / 10);
+	
+	_putchar('0' + x % 10);
+}
+
+/**
+ * counti - counts int length
+ * @x: int
+ *
+ * Return: int length
+ */
+
+int counti(int x)
+{
+	int i = 0;
+
+	if (x < 0)
+	{
+		x = -1 * x;
+		++i;
+	}
+	while (x > 0)
+	{
+		++i;
+		x = x / 10;
+	}
+	return (i);
+}
+
+/**
  * _printf - custom made printf function
  * @format: character string
  *
@@ -23,7 +65,7 @@ void prints(char *str, int n)
 
 int _printf(const char *format, ...)
 {
-	int i, n, count = 0;
+	int i, n, x, count = 0;
 	char *str;
 	va_list arg;
 
@@ -57,6 +99,16 @@ int _printf(const char *format, ...)
 			++i;
 			switch (format[i])
 			{
+				case 'i':
+					x = va_arg(arg, int);
+					printi(x);
+					count += counti(x);
+					break;
+				case 'd':
+					x = va_arg(arg, int);
+					printi(x);
+					count += counti(x);
+					break;
 				case 'c':
 					_putchar(va_arg(arg, int));
 					++count;
