@@ -19,7 +19,7 @@ void prints(char *str, int n)
  * @x: intiger
  */
 
-int printi(int x)
+void printi(int x)
 {
 	if (x < 0)
 	{
